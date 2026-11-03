@@ -1,0 +1,17 @@
+<!-- @dsCard group="Status" height=130 -->
+<!doctype html>
+<html lang="uk">
+<head><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css">
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');document.documentElement.dataset.theme=t||'dark';
+addEventListener('message',function(e){if(e.data&&e.data.dsTheme)document.documentElement.dataset.theme=e.data.dsTheme});
+function h(){parent.postMessage({dsHeight:document.documentElement.scrollHeight,name:location.pathname},'*')}
+addEventListener('load',function(){h();new ResizeObserver(h).observe(document.body)})})()</script>
+<script src="../bundle.js"></script><meta charset="utf-8"><title>Badge — preview</title>
+<style>body{padding:20px;background:var(--color-bg)} .pv-label{font:var(--text-caption);color:var(--color-text-muted);margin:0 0 8px}</style></head>
+<body>
+
+<div class="stack"><div class="row"><span class="badge">Нейтральний</span><span class="badge badge--brand">Бренд</span><span class="badge badge--success">Доставлено</span><span class="badge badge--warning">Очікує</span><span class="badge badge--error">Скасовано</span><span class="badge badge--info">Нове</span><span class="badge badge--accent">−20%</span></div>
+<div class="row"><span class="badge badge--dot badge--success">Онлайн</span><span class="badge badge--dot badge--warning">В обробці</span><span class="badge badge--solid badge--brand">Хіт</span><span class="badge badge--solid badge--accent">Новинка</span><button class="btn btn--ghost">Кошик <span class="badge badge--count">3</span></button></div></div>
+<script>DS.init();</script>
+</body>
+</html>

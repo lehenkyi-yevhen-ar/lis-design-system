@@ -1,0 +1,18 @@
+<!-- @dsCard group="Content" height=260 -->
+<!doctype html>
+<html lang="uk">
+<head><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css">
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');document.documentElement.dataset.theme=t||'dark';
+addEventListener('message',function(e){if(e.data&&e.data.dsTheme)document.documentElement.dataset.theme=e.data.dsTheme});
+function h(){parent.postMessage({dsHeight:document.documentElement.scrollHeight,name:location.pathname},'*')}
+addEventListener('load',function(){h();new ResizeObserver(h).observe(document.body)})})()</script>
+<script src="../bundle.js"></script><meta charset="utf-8"><title>Accordion — preview</title>
+<style>body{padding:20px;background:var(--color-bg)} .pv-label{font:var(--text-caption);color:var(--color-text-muted);margin:0 0 8px}</style></head>
+<body>
+
+<div class="acc" data-acc="single"><div class="acc__item is-open"><button class="acc__btn">Скільки триває доставка?<span class="acc__icon" aria-hidden="true"></span></button><div class="acc__panel"><div><p>1–2 дні Новою поштою. Великі меблі — власна служба, 3–5 днів.</p></div></div></div>
+<div class="acc__item"><button class="acc__btn">Чи можна повернути товар?<span class="acc__icon" aria-hidden="true"></span></button><div class="acc__panel"><div><p>Так, 30 днів. Зворотну доставку оплачуємо ми.</p></div></div></div>
+<div class="acc__item"><button class="acc__btn">Як доглядати за деревом?<span class="acc__icon" aria-hidden="true"></span></button><div class="acc__panel"><div><p>Раз на пів року — олія з комплекту.</p></div></div></div></div>
+<script>DS.init();</script>
+</body>
+</html>

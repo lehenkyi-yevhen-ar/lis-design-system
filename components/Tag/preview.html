@@ -1,0 +1,17 @@
+<!-- @dsCard group="Status" height=120 -->
+<!doctype html>
+<html lang="uk">
+<head><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css">
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');document.documentElement.dataset.theme=t||'dark';
+addEventListener('message',function(e){if(e.data&&e.data.dsTheme)document.documentElement.dataset.theme=e.data.dsTheme});
+function h(){parent.postMessage({dsHeight:document.documentElement.scrollHeight,name:location.pathname},'*')}
+addEventListener('load',function(){h();new ResizeObserver(h).observe(document.body)})})()</script>
+<script src="../bundle.js"></script><meta charset="utf-8"><title>Tag — preview</title>
+<style>body{padding:20px;background:var(--color-bg)} .pv-label{font:var(--text-caption);color:var(--color-text-muted);margin:0 0 8px}</style></head>
+<body>
+
+<div class="stack"><div class="row" id="chips"><button class="tag is-selected" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Усі</button><button class="tag" aria-pressed="false">Дуб</button><button class="tag" aria-pressed="false">Ясен</button><button class="tag" aria-pressed="false">Льон</button><button class="tag" disabled>Disabled</button></div>
+<div class="row" id="rm"><span class="tag">Київ<button class="tag__x" aria-label="Прибрати"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg></button></span><span class="tag">До 2 000 ₴<button class="tag__x" aria-label="Прибрати"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg></button></span></div></div>
+<script>DS.init();document.getElementById('chips').onclick=e=>{const t=e.target.closest('.tag');if(!t||t.disabled)return;const p=t.getAttribute('aria-pressed')==='true';t.setAttribute('aria-pressed',!p);t.classList.toggle('is-selected',!p)};document.getElementById('rm').onclick=e=>{const x=e.target.closest('.tag__x');if(x)x.parentElement.remove()};</script>
+</body>
+</html>

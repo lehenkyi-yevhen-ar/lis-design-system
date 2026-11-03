@@ -1,0 +1,20 @@
+<!-- @dsCard group="Actions" height=300 -->
+<!doctype html>
+<html lang="uk">
+<head><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css">
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');document.documentElement.dataset.theme=t||'dark';
+addEventListener('message',function(e){if(e.data&&e.data.dsTheme)document.documentElement.dataset.theme=e.data.dsTheme});
+function h(){parent.postMessage({dsHeight:document.documentElement.scrollHeight,name:location.pathname},'*')}
+addEventListener('load',function(){h();new ResizeObserver(h).observe(document.body)})})()</script>
+<script src="../bundle.js"></script><meta charset="utf-8"><title>Button — preview</title>
+<style>body{padding:20px;background:var(--color-bg)} .pv-label{font:var(--text-caption);color:var(--color-text-muted);margin:0 0 8px}</style></head>
+<body>
+
+<div class="stack">
+<div class="row"><button class="btn btn--primary">Основна дія</button><button class="btn btn--secondary">Вторинна</button><button class="btn btn--accent">Акцентна</button><button class="btn btn--outline">Контурна</button><button class="btn btn--ghost">Прозора</button><button class="btn btn--danger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 7V4h4v3M6 7l1 13h10l1-13"/></svg>Видалити</button></div>
+<div class="row"><button class="btn btn--primary is-hover">Hover</button><button class="btn btn--primary is-focus">Focus</button><button class="btn btn--primary" disabled>Disabled</button><button class="btn btn--primary is-loading">Loading</button><button class="btn btn--outline is-hover">Glass hover</button></div>
+<div class="row"><button class="btn btn--primary btn--sm">Small 36</button><button class="btn btn--primary">Medium 44</button><button class="btn btn--primary btn--lg">Large 52 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><button class="btn btn--outline btn--icon" aria-label="Пошук"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></button><button class="btn btn--ghost btn--icon btn--round" aria-label="Обране"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg></button></div>
+</div>
+<script>DS.init();</script>
+</body>
+</html>

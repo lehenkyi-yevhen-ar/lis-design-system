@@ -1,0 +1,15 @@
+<!-- @dsCard group="Navigation" height=70 -->
+<!doctype html>
+<html lang="uk">
+<head><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css">
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');document.documentElement.dataset.theme=t||'dark';
+addEventListener('message',function(e){if(e.data&&e.data.dsTheme)document.documentElement.dataset.theme=e.data.dsTheme});
+function h(){parent.postMessage({dsHeight:document.documentElement.scrollHeight,name:location.pathname},'*')}
+addEventListener('load',function(){h();new ResizeObserver(h).observe(document.body)})})()</script>
+<script src="../bundle.js"></script><meta charset="utf-8"><title>Breadcrumbs — preview</title>
+<style>body{padding:20px;background:var(--color-bg)} .pv-label{font:var(--text-caption);color:var(--color-text-muted);margin:0 0 8px}</style></head>
+<body>
+<ol class="crumbs" aria-label="Хлібні крихти"><li><a href="#">Головна</a></li><li><a href="#">Каталог</a></li><li><a href="#">Крісла</a></li><li><span aria-current="page">Крісло «Дуб»</span></li></ol>
+<script>DS.init();</script>
+</body>
+</html>

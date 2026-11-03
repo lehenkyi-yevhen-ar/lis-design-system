@@ -1,0 +1,16 @@
+<!-- @dsCard group="Actions" height=110 -->
+<!doctype html>
+<html lang="uk">
+<head><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css">
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');document.documentElement.dataset.theme=t||'dark';
+addEventListener('message',function(e){if(e.data&&e.data.dsTheme)document.documentElement.dataset.theme=e.data.dsTheme});
+function h(){parent.postMessage({dsHeight:document.documentElement.scrollHeight,name:location.pathname},'*')}
+addEventListener('load',function(){h();new ResizeObserver(h).observe(document.body)})})()</script>
+<script src="../bundle.js"></script><meta charset="utf-8"><title>Link — preview</title>
+<style>body{padding:20px;background:var(--color-bg)} .pv-label{font:var(--text-caption);color:var(--color-text-muted);margin:0 0 8px}</style></head>
+<body>
+
+<p style="margin:0;max-width:60ch">Посилання в тексті: <a href="#" class="link">дізнатися більше про матеріали</a>. Наведення: <a href="#" class="link is-hover">товща лінія</a>. Тихе — для футера: <a href="#" class="link link--quiet">Політика конфіденційності</a>.</p>
+<script>DS.init();</script>
+</body>
+</html>

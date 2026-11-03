@@ -1,0 +1,29 @@
+<!-- @dsCard group="Content" height=460 -->
+<!doctype html>
+<html lang="uk">
+<head><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css">
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');document.documentElement.dataset.theme=t||'dark';
+addEventListener('message',function(e){if(e.data&&e.data.dsTheme)document.documentElement.dataset.theme=e.data.dsTheme});
+function h(){parent.postMessage({dsHeight:document.documentElement.scrollHeight,name:location.pathname},'*')}
+addEventListener('load',function(){h();new ResizeObserver(h).observe(document.body)})})()</script>
+<script src="../bundle.js"></script><meta charset="utf-8"><title>Card — preview</title>
+<style>body{padding:20px;background:var(--color-bg)} .pv-label{font:var(--text-caption);color:var(--color-text-muted);margin:0 0 8px}</style></head>
+<body>
+<style>.art{position:absolute;inset:0;background:var(--g)}.art::before,.art::after{content:"";position:absolute;border-radius:50%}
+.a1{--g:linear-gradient(150deg,var(--forest-600),var(--forest-900))}.a1::before{width:46%;height:40%;left:27%;top:24%;background:var(--cocoa-300);border-radius:24% 24% 8px 8px}.a1::after{width:54%;height:9%;left:23%;top:62%;background:var(--cocoa-500);border-radius:6px}
+.a2{--g:linear-gradient(160deg,var(--clay-300),var(--clay-600))}.a2::before{width:40%;height:50%;left:30%;top:18%;background:var(--sand-100);border-radius:50% 50% 12px 12px}.a2::after{width:8%;height:28%;left:46%;top:56%;background:var(--cocoa-700);border-radius:4px}
+.a3{--g:linear-gradient(150deg,var(--sand-300),var(--sand-500))}.a3::before{width:60%;height:30%;left:20%;top:35%;background:var(--forest-700);border-radius:999px}.a3::after{width:22%;height:18%;left:39%;top:41%;background:var(--amber-300)}
+.a5{--g:linear-gradient(170deg,var(--forest-300) 0%,var(--forest-700) 55%,var(--forest-900))}.a5::before{width:70%;height:90%;left:-12%;bottom:-40%;background:var(--forest-800)}.a5::after{width:80%;height:80%;right:-28%;bottom:-36%;background:var(--forest-600)}
+.stagebg{position:absolute;inset:0;background:linear-gradient(160deg,var(--forest-800),var(--sand-950) 55%,var(--cocoa-900));overflow:hidden}
+[data-theme="light"] .stagebg{background:linear-gradient(160deg,var(--forest-200),var(--sand-100) 50%,var(--clay-100))}
+.blob{position:absolute;border-radius:50%;filter:blur(10px)}.b1{width:260px;height:260px;background:var(--clay-400);left:50%;top:-60px;opacity:.85}.b2{width:220px;height:220px;background:var(--forest-300);left:-40px;bottom:-80px;opacity:.8}.b3{width:160px;height:160px;background:var(--amber-300);right:6%;bottom:8%;opacity:.7}
+</style>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px">
+<a class="card card--interactive" href="#" onclick="event.preventDefault()"><div class="card__media"><div class="art a1"></div><div class="card__badges"><span class="badge badge--solid badge--accent">Новинка</span></div><button class="btn btn--ghost btn--icon btn--sm card__fav glass" aria-label="В обране"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg></button></div><div class="card__body"><span class="rating"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5Z"/></svg>4,9 · 128</span><h3 class="card__title">Крісло «Дуб» з льняною подушкою</h3><div class="card__foot"><span class="price">12 400 ₴</span><button class="btn btn--primary btn--sm btn--icon" aria-label="В кошик"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></button></div></div></a>
+<a class="card card--interactive" href="#" onclick="event.preventDefault()"><div class="card__media"><div class="art a2"></div><div class="card__badges"><span class="badge badge--solid badge--error">−20%</span></div></div><div class="card__body"><span class="rating"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5Z"/></svg>4,7 · 54</span><h3 class="card__title">Лампа «Глина»</h3><div class="card__foot"><span class="price price--sale">2 320 ₴<s>2 900 ₴</s></span><button class="btn btn--primary btn--sm btn--icon" aria-label="В кошик"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></button></div></div></a>
+<div class="stack" style="gap:20px"><div class="card stat"><span class="stat__label">Виручка, листопад</span><div class="stat__value">482 тис ₴</div><span class="badge badge--success">↑ 12,4%</span></div>
+<div class="card" aria-busy="true"><div class="card__body"><div class="skel" style="height:12px;width:50%"></div><div class="skel" style="height:16px;width:90%"></div><div class="skel" style="height:28px;width:40%;margin-top:8px"></div></div></div></div>
+</div>
+<script>DS.init();</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!-- @dsCard group="Content" height=200 -->
+<!doctype html>
+<html lang="uk">
+<head><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css">
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');document.documentElement.dataset.theme=t||'dark';
+addEventListener('message',function(e){if(e.data&&e.data.dsTheme)document.documentElement.dataset.theme=e.data.dsTheme});
+function h(){parent.postMessage({dsHeight:document.documentElement.scrollHeight,name:location.pathname},'*')}
+addEventListener('load',function(){h();new ResizeObserver(h).observe(document.body)})})()</script>
+<script src="../bundle.js"></script><meta charset="utf-8"><title>Tabs — preview</title>
+<style>body{padding:20px;background:var(--color-bg)} .pv-label{font:var(--text-caption);color:var(--color-text-muted);margin:0 0 8px}</style></head>
+<body>
+
+<div data-tabs><div class="tabs__list"><button class="tabs__tab" aria-selected="true" aria-controls="p1">Опис</button><button class="tabs__tab" aria-controls="p2">Характеристики</button><button class="tabs__tab" aria-controls="p3">Відгуки <span class="badge">128</span></button></div>
+<div class="tabs__panel" id="p1"><p style="margin:0;max-width:60ch">Крісло з масиву дуба, зібране без металу — лише шипові з'єднання.</p></div><div class="tabs__panel" id="p2" hidden><p style="margin:0">Дуб, льон · 62 × 70 × 82 см · 9,4 кг</p></div><div class="tabs__panel" id="p3" hidden><p style="margin:0" class="t-muted">«Сидіти зручно навіть кілька годин.» — Андрій, Львів</p></div></div>
+<script>DS.init();</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!-- @dsCard group="Forms" height=330 -->
+<!doctype html>
+<html lang="uk">
+<head><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css">
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');document.documentElement.dataset.theme=t||'dark';
+addEventListener('message',function(e){if(e.data&&e.data.dsTheme)document.documentElement.dataset.theme=e.data.dsTheme});
+function h(){parent.postMessage({dsHeight:document.documentElement.scrollHeight,name:location.pathname},'*')}
+addEventListener('load',function(){h();new ResizeObserver(h).observe(document.body)})})()</script>
+<script src="../bundle.js"></script><meta charset="utf-8"><title>Field — preview</title>
+<style>body{padding:20px;background:var(--color-bg)} .pv-label{font:var(--text-caption);color:var(--color-text-muted);margin:0 0 8px}</style></head>
+<body>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px">
+<div class="field"><label class="field__label" for="a">Ім'я</label><input class="input" id="a" placeholder="Олена"><span class="field__help">Як у паспорті</span></div>
+<div class="field"><label class="field__label" for="b">Focus</label><input class="input is-focus" id="b" value="Олена Коваленко"><span class="field__help">Рамка primary + м'яке кільце</span></div>
+<div class="field is-error"><label class="field__label" for="c">Email</label><input class="input" id="c" value="olena@" aria-invalid="true"><span class="field__help">Введіть email повністю, напр. olena@mail.com</span></div>
+<div class="field"><label class="field__label" for="d">Пошук</label><div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg><input class="input" id="d" placeholder="Пошук товарів"></div></div>
+<div class="field"><label class="field__label" for="e">Сума <span class="opt">· необов'язково</span></label><div class="input-wrap"><input class="input" id="e" value="1 250"><span class="input-suffix">₴</span></div></div>
+<div class="field"><label class="field__label" for="f">Disabled</label><input class="input" id="f" value="Недоступно" disabled></div>
+<div class="field" style="grid-column:1/-1"><label class="field__label" for="g">Коментар</label><textarea class="textarea" id="g" placeholder="Напр., зателефонуйте за годину"></textarea></div>
+</div>
+<script>DS.init();</script>
+</body>
+</html>

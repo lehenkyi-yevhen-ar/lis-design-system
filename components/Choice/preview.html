@@ -1,0 +1,20 @@
+<!-- @dsCard group="Forms" height=250 -->
+<!doctype html>
+<html lang="uk">
+<head><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css">
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');document.documentElement.dataset.theme=t||'dark';
+addEventListener('message',function(e){if(e.data&&e.data.dsTheme)document.documentElement.dataset.theme=e.data.dsTheme});
+function h(){parent.postMessage({dsHeight:document.documentElement.scrollHeight,name:location.pathname},'*')}
+addEventListener('load',function(){h();new ResizeObserver(h).observe(document.body)})})()</script>
+<script src="../bundle.js"></script><meta charset="utf-8"><title>Choice — preview</title>
+<style>body{padding:20px;background:var(--color-bg)} .pv-label{font:var(--text-caption);color:var(--color-text-muted);margin:0 0 8px}</style></head>
+<body>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px">
+<div class="stack"><label class="choice"><input type="checkbox" class="check">Не вибрано</label><label class="choice"><input type="checkbox" class="check" checked>Вибрано</label><label class="choice"><input type="checkbox" class="check" id="ind">Частково</label><label class="choice"><input type="checkbox" class="check" checked disabled>Disabled</label></div>
+<div class="stack"><label class="choice"><input type="radio" name="r" class="radio" checked><span>Нова пошта<small>1–2 дні · від 70 ₴</small></span></label><label class="choice"><input type="radio" name="r" class="radio"><span>Самовивіз<small>Київ, безкоштовно</small></span></label><label class="choice"><input type="radio" name="x" class="radio" disabled>Disabled</label></div>
+<div class="stack"><label class="choice" style="align-items:center"><input type="checkbox" class="switch" role="switch">Вимкнено</label><label class="choice" style="align-items:center"><input type="checkbox" class="switch" role="switch" checked>Увімкнено</label><label class="choice" style="align-items:center"><input type="checkbox" class="switch" role="switch" disabled>Disabled</label></div>
+</div>
+<script>DS.init();document.getElementById('ind').indeterminate=true;</script>
+</body>
+</html>

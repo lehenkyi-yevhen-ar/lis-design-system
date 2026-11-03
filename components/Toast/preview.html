@@ -1,0 +1,17 @@
+<!-- @dsCard group="Status" height=300 -->
+<!doctype html>
+<html lang="uk">
+<head><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css">
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');document.documentElement.dataset.theme=t||'dark';
+addEventListener('message',function(e){if(e.data&&e.data.dsTheme)document.documentElement.dataset.theme=e.data.dsTheme});
+function h(){parent.postMessage({dsHeight:document.documentElement.scrollHeight,name:location.pathname},'*')}
+addEventListener('load',function(){h();new ResizeObserver(h).observe(document.body)})})()</script>
+<script src="../bundle.js"></script><meta charset="utf-8"><title>Toast — preview</title>
+<style>body{padding:20px;background:var(--color-bg)} .pv-label{font:var(--text-caption);color:var(--color-text-muted);margin:0 0 8px}</style></head>
+<body>
+
+<div class="row"><button class="btn btn--outline" data-t="success">Успіх</button><button class="btn btn--outline" data-t="error">Помилка</button><button class="btn btn--outline" data-t="warning">Попередження</button><button class="btn btn--outline" data-t="info">Інфо</button><button class="btn btn--outline" data-t="undo">З дією</button></div>
+<script>DS.init();const T={success:{type:'success',title:'Збережено',text:'Зміни в замовленні збережено.'},error:{type:'error',title:'Не вдалося оплатити',text:'Банк відхилив платіж. Спробуйте іншу картку.'},warning:{type:'warning',title:'Залишилось 2 шт.',text:'Товар закінчується.'},info:{type:'info',title:'Нова версія',text:'Оновіть сторінку.'},undo:{type:'success',title:'Видалено з кошика',text:'Крісло «Дуб»',action:{label:'Скасувати'}}};
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>DS.toast(T[b.dataset.t]));DS.toast({type:'success',title:'Додано в кошик',text:'Крісло «Дуб», 1 шт.',duration:0});</script>
+</body>
+</html>
