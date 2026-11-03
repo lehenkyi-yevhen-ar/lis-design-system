@@ -209,6 +209,10 @@ h2.sec{margin:56px 0 6px}.muted{color:var(--color-text-muted)}
 .btn{font:600 14px/1 var(--font-body);padding:13px 18px;border-radius:10px;border:0;background:var(--color-primary);color:var(--color-on-primary)}
 .stat{border-top:1px solid var(--color-border);padding:14px 0}
 </style><style id="mobile-patch">
+:root{--color-scrollbar:#827969;--color-scrollbar-hover:#A19785;--scrollbar-size:12px}[data-theme="light"]{--color-scrollbar-hover:#615E4F}
+::-webkit-scrollbar{width:var(--scrollbar-size);height:var(--scrollbar-size);background:transparent}::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background:transparent}::-webkit-scrollbar-button{display:none;width:0;height:0}
+::-webkit-scrollbar-thumb{min-height:40px;min-width:40px;border:3px solid transparent;border-radius:999px;background:var(--color-scrollbar);background-clip:content-box}::-webkit-scrollbar-thumb:hover,::-webkit-scrollbar-thumb:active{background:var(--color-scrollbar-hover);background-clip:content-box}
+@supports not selector(::-webkit-scrollbar){*{scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) transparent}}
 /* Мобільний шар: демо-сторінки містять власну копію стилів, тут — виправлення для телефона. Джерело правди — components/bundle.css */
 :root{--tabbar-height:64px;--touch-target:44px;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
 .card:has(.dd.is-open,.dp.is-open){overflow:visible}

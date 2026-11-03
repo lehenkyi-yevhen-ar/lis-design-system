@@ -30,6 +30,8 @@
   --disabled-fg: var(--sand-400);
   --input-bg: var(--sand-950);
   --input-hover-border: var(--sand-400);
+  --color-scrollbar: var(--sand-500);
+  --color-scrollbar-hover: var(--sand-400);
   --control-thumb: var(--sand-100);
   --surface-1: var(--sand-900);
   --surface-2: var(--sand-800);
@@ -159,6 +161,8 @@
   --disabled-fg: var(--sand-500);
   --input-bg: #FFFCF7;
   --input-hover-border: var(--sand-600);
+  --color-scrollbar: var(--sand-500);
+  --color-scrollbar-hover: var(--sand-600);
   --control-thumb: #FFFCF7;
   --surface-1: #FFFCF7;
   --surface-2: #FFFCF7;

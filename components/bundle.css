@@ -34,6 +34,19 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text); font: v
 .row { display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center; }
 .stack { display: flex; flex-direction: column; gap: var(--space-4); }
 
+/* ---------- Скролбар ----------
+   Єдиний для сторінки, списків, модалок і таблиць: капсула 6px у відступі 3px, прозорий трек, без стрілок.
+   Кольори — color-scrollbar / color-scrollbar-hover (≥3:1 до фону в обох темах). Chromium і Safari — ::-webkit-scrollbar,
+   Firefox — scrollbar-color. Елементи зі схованим скролом (таби, фільтри) мають scrollbar-width: none. */
+:root { --scrollbar-size: 12px; }
+::-webkit-scrollbar { width: var(--scrollbar-size); height: var(--scrollbar-size); background: transparent; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-corner { background: transparent; }
+::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+::-webkit-scrollbar-thumb { min-height: 40px; min-width: 40px; border: 3px solid transparent; border-radius: var(--radius-full); background: var(--color-scrollbar); background-clip: content-box; }
+::-webkit-scrollbar-thumb:hover, ::-webkit-scrollbar-thumb:active { background: var(--color-scrollbar-hover); background-clip: content-box; }
+@supports not selector(::-webkit-scrollbar) { * { scrollbar-width: thin; scrollbar-color: var(--color-scrollbar) transparent; } }
+
 /* ---------- Button ---------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
@@ -254,7 +267,6 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text); font: v
   min-width: 220px; max-height: 320px; overflow: auto; padding: 6px; border-radius: var(--radius-lg);
   opacity: 0; transform: translateY(-6px) scale(.98); transform-origin: top center; pointer-events: none; visibility: hidden;
   transition: opacity var(--duration-base) var(--ease-standard), transform var(--duration-slow) var(--ease-emphasized), visibility 0s linear var(--duration-base);
-  scrollbar-width: thin;
 }
 .dd.is-up .dd__menu { top: auto; bottom: calc(100% + 6px); transform-origin: bottom center; }
 .dd--right .dd__menu { left: auto; right: 0; }
