@@ -32,6 +32,11 @@
 | `fonts/` | Ermilov, KyivType Sans |
 | `demo/` | Повні сторінки: магазин, компоненти, основи, типографіка, кольори |
 
+## Автор
+
+**Євген Легенький** — дизайн і розробка системи.
+Instagram: [@legen_eugnekyi](https://www.instagram.com/legen_eugnekyi/) · LinkedIn: [yevhen-lehenkyi](https://www.linkedin.com/in/yevhen-lehenkyi/)
+
 ## Шрифти й ліцензії
 
 - **Ermilov** — Кирило Ткачов (Innerspace), шрифт бренду Ukraine Now, вільний для комерційного й приватного використання ([The Village, 2018](https://www.village.com.ua/village/culture/culture-news/274281-shrift-brendu-ukraine-now-viklali-u-vilniy-dostup)).
