@@ -217,7 +217,7 @@ h2.sec{margin:56px 0 6px}.muted{color:var(--color-text-muted)}
 :root{--tabbar-height:64px;--touch-target:44px;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
 .card:has(.dd.is-open,.dp.is-open){overflow:visible}
 .form-section{overflow:visible}
-.segmented{max-width:100%;overflow-x:auto;scrollbar-width:none}
+.segmented,.pager{max-width:100%;overflow-x:auto;scrollbar-width:none}
 .segmented::-webkit-scrollbar{display:none}
 .wrap{min-width:0;overflow-x:clip}
 .g2>*,.g3>*,.two>*,.weights>*,.fonts>*,.rad>*{min-width:0}
@@ -230,8 +230,19 @@ h2.sec{margin:56px 0 6px}.muted{color:var(--color-text-muted)}
  .sp{grid-template-columns:76px 44px minmax(0,1fr);gap:var(--space-3)}
  .wbig{font-size:44px}
  .dp__pop{width:min(332px,calc(100vw - 32px))}
+ .dp--inline .dp__pop{width:100%!important;max-width:100%!important}
 }
 .box:has(>table),.box:has(>.table-wrap){overflow-x:auto}
+/* MOBILE2 */
+@media(max-width:760px){.steps{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media(max-width:640px){
+ .weights{grid-template-columns:minmax(0,1fr)!important}
+ .steps{grid-template-columns:repeat(4,minmax(0,1fr))}
+ #themeSeg{position:static;margin:12px 16px 16px auto;width:max-content}
+ .elev{padding:var(--space-4);gap:var(--space-3)}
+ .elev div{height:auto;min-height:120px;gap:var(--space-3)}
+ .z div{grid-template-columns:minmax(0,1fr);gap:2px}
+}
 .fcard{min-width:0;overflow:hidden}.fcard>*{max-width:100%;overflow-wrap:anywhere}
 </style>
 </head><body><div class="wrap">
