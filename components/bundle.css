@@ -222,7 +222,8 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text); font: v
 .btn--ghost.is-disabled, .btn--ghost:disabled { backdrop-filter: none; box-shadow: none; }
 
 /* ---------- Segmented control (glass) ---------- */
-.segmented { display: inline-flex; position: relative; padding: 4px; border-radius: var(--radius-full); gap: 0; }
+.segmented { display: inline-flex; position: relative; padding: 4px; border-radius: var(--radius-full); gap: 0; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.segmented::-webkit-scrollbar { display: none; }
 .segmented__btn {
   position: relative; z-index: 1; border: 0; background: transparent; cursor: pointer; white-space: nowrap;
   font: var(--text-label); color: var(--color-text-muted); height: 36px; padding: 0 16px; border-radius: var(--radius-full);
@@ -314,6 +315,27 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text); font: v
 .cal__foot .spec { font: var(--text-caption); color: var(--color-text-muted); }
 .dd__value svg, .dd__value .lead-ic { width: var(--icon-md); height: var(--icon-md); color: var(--color-text-muted); flex: none; }
 
+/* ---------- Шторка на телефоні ----------
+   До 640px список (.dd__menu) і календар (.dp__pop) відкриваються знизу екрана як шторка: великі зони натиску,
+   нічого не обрізається краєм екрана чи батьківським блоком. DS.js додає .ds-scrim (затемнення), клік по ньому закриває. */
+.ds-scrim { position: fixed; inset: 0; z-index: calc(var(--z-overlay) - 1); background: rgb(18 22 17 / .5); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); opacity: 0; visibility: hidden; transition: opacity var(--duration-base) var(--ease-standard), visibility 0s linear var(--duration-base); }
+.ds-scrim.is-on { opacity: 1; visibility: visible; transition-delay: 0s; }
+@media (max-width: 640px) {
+  .dd .dd__menu, .dd.is-up .dd__menu, .dd--right .dd__menu,
+  .dp:not(.dp--inline) .dp__pop, .dp.is-up:not(.dp--inline) .dp__pop {
+    position: fixed; top: auto; left: var(--space-2); right: var(--space-2); bottom: calc(var(--space-2) + var(--safe-bottom));
+    width: auto; max-width: 440px; margin-inline: auto; z-index: var(--z-overlay); transform-origin: bottom center;
+    transform: translateY(32px); border-radius: var(--radius-xl);
+  }
+  .dd .dd__menu, .dd.is-up .dd__menu, .dd--right .dd__menu { min-width: 0; max-height: min(70dvh, 520px); padding: var(--space-2); overscroll-behavior: contain; }
+  .dd .dd__opt { min-height: 48px; padding: 10px 12px; }
+  .dd .dd__search { top: calc(var(--space-2) * -1); }
+  .dd.is-open .dd__menu, .dp.is-open:not(.dp--inline) .dp__pop { transform: none; }
+  .dp:not(.dp--inline) .dp__pop { padding: var(--space-4) var(--space-4) var(--space-3); }
+  .dp .cal__day { height: 44px; } .dp .cal__day span { width: 42px; height: 42px; }
+  .dp .cal__nav .btn { width: 44px; height: 44px; }
+}
+
 /* ---------- Concentric corners ----------
    Внутрішній радіус = зовнішній − відступ. У капсулах (radius-full) усе всередині теж капсули.
    Додайте .pill-group будь-якому контейнеру-капсулі (навбар, тулбар, група кнопок). */
@@ -328,6 +350,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text); font: v
 .card { position: relative; display: flex; flex-direction: column; background: var(--color-surface); border: var(--border-thin) solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; color: inherit; text-decoration: none;
   transition: transform var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard), border-color var(--duration-base); }
 .card--interactive { cursor: pointer; }
+.card:has(.dd.is-open, .dp.is-open) { overflow: visible; } /* відкритий список або календар не обрізається карткою */
 .card--interactive:hover { transform: translateY(-3px); box-shadow: var(--elevation-2); border-color: var(--color-border-strong); }
 .card--interactive:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus); outline-offset: var(--focus-ring-offset); }
 .card__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--color-surface-raised); }
@@ -346,7 +369,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text); font: v
 .price s { font: 400 13px/1 var(--font-body); color: var(--color-text-muted); margin-left: 6px; letter-spacing: 0; }
 .price--sale { color: var(--color-accent-text); }
 .card--h { flex-direction: row; } .card--h .card__media { aspect-ratio: auto; width: 38%; flex: none; }
-@media (max-width: 560px) { .card--h { flex-direction: column; } .card--h .card__media { width: 100%; aspect-ratio: 16/9; } }
+@media (max-width: 640px) { .card--h { flex-direction: column; } .card--h .card__media { width: 100%; aspect-ratio: 16/9; } }
 .stat { padding: var(--space-5); }
 .stat__value { font: 700 clamp(30px, 3.4vw, 40px)/1 var(--font-display); font-variant-numeric: tabular-nums; margin: var(--space-2) 0 var(--space-3); }
 .stat__label { font: var(--text-body-s); color: var(--color-text-muted); }
@@ -369,6 +392,55 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text); font: v
 .nav-list a[aria-current="page"] { color: var(--color-primary); }
 .nav-list a svg { width: 20px; height: 20px; color: var(--color-text-muted); }
 
+/* ---------- TabBar (нижня навігація, мобільна) ----------
+   Плаваюча скляна капсула внизу екрана, як у застосунках iOS 26. 3–5 розділів верхнього рівня; активний — aria-current="page".
+   Підпис завжди видно (іконка без тексту нечитна). Відступ від низу враховує «підборіддя» телефона (safe-area).
+   Сторінці з tabbar додайте .has-tabbar на body, щоб останній блок не ховався під капсулою. */
+.tabbar {
+  position: fixed; left: var(--space-3); right: var(--space-3); bottom: calc(var(--space-3) + var(--safe-bottom)); z-index: var(--z-sticky);
+  display: flex; gap: 2px; padding: 6px; max-width: 480px; margin-inline: auto; border-radius: var(--radius-full);
+}
+.tabbar--static { position: relative; left: auto; right: auto; bottom: auto; }
+.tabbar--mobile { display: none; }
+@media (max-width: 640px) { .tabbar--mobile { display: flex; } }
+.tabbar__item {
+  position: relative; flex: 1 1 0; min-width: 0; min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  padding: 6px 4px; border: 0; background: transparent; border-radius: var(--radius-full); cursor: pointer; text-decoration: none;
+  font: 600 12px/1 var(--font-body); color: var(--color-text-muted); -webkit-tap-highlight-color: transparent;
+  transition: color var(--duration-base) var(--ease-standard), background var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard);
+}
+.tabbar__item svg { width: var(--icon-lg); height: var(--icon-lg); flex: none; }
+.tabbar__item > span:not(.tabbar__badge) { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tabbar__item:hover { color: var(--color-text); }
+.tabbar__item[aria-current="page"], .tabbar__item.is-active {
+  color: var(--color-text);
+  background: radial-gradient(100% 70% at 30% 0%, var(--glass-spec-soft), transparent 70%), var(--glass-thumb);
+  box-shadow: inset 0 1px 0 var(--glass-spec), inset 0 0 0 1px var(--glass-rim), 0 2px 8px rgb(0 0 0 / .18);
+}
+.tabbar__item[aria-current="page"] svg, .tabbar__item.is-active svg { color: var(--color-primary); }
+.tabbar__item:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus); outline-offset: -2px; }
+.tabbar__item:active { transform: scale(.96); }
+.tabbar__badge {
+  position: absolute; top: 4px; left: calc(50% + 4px); min-width: 18px; height: 18px; padding: 0 5px; border-radius: var(--radius-full);
+  display: inline-grid; place-items: center; background: var(--color-accent-strong); color: var(--color-on-accent); font: 700 11px/1 var(--font-body); font-variant-numeric: tabular-nums;
+}
+.has-tabbar { padding-bottom: calc(var(--tabbar-height) + var(--space-6) + var(--safe-bottom)); }
+@media (max-width: 640px) { body:has(> .tabbar--mobile) { padding-bottom: calc(var(--tabbar-height) + var(--space-6) + var(--safe-bottom)); } } /* .tabbar--mobile прямо в body: відступ лише на телефоні */
+
+/* ---------- ActionBar (липка головна дія) ----------
+   Підсумок і одна primary-кнопка внизу екрана: оформлення, збереження. З .has-tabbar на body піднімається над tabbar. */
+.action-bar {
+  position: fixed; left: var(--space-3); right: var(--space-3); bottom: calc(var(--space-3) + var(--safe-bottom)); z-index: var(--z-sticky);
+  display: flex; align-items: center; gap: var(--space-4); max-width: 480px; margin-inline: auto; padding: 6px 6px 6px var(--space-5);
+  border-radius: var(--radius-full); --btn-radius: var(--radius-full);
+}
+.action-bar[hidden] { display: none; }
+.has-tabbar .action-bar { bottom: calc(var(--tabbar-height) + var(--space-6) + var(--safe-bottom)); }
+.action-bar__sum { display: flex; flex-direction: column; gap: 2px; min-width: 0; margin-right: auto; font: var(--text-caption); color: var(--color-text-muted); }
+.action-bar__sum .price { font-size: 20px; color: var(--color-text); }
+.action-bar .btn { height: 48px; }
+.has-actionbar { padding-bottom: calc(var(--tabbar-height) + var(--space-6) + 72px + var(--space-3) + var(--safe-bottom)); }
+
 /* ---------- Breadcrumbs ---------- */
 .crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font: var(--text-body-s); list-style: none; margin: 0; padding: 0; }
 .crumbs a { color: var(--color-text-muted); text-decoration: none; border-radius: 4px; }
@@ -382,6 +454,8 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text); font: v
 
 /* ---------- Pagination ---------- */
 .pager { display: inline-flex; align-items: center; gap: 2px; padding: 4px; border-radius: var(--radius-full); --btn-radius: var(--radius-full); background: var(--color-surface); border: var(--border-thin) solid var(--color-border); }
+.pager { max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.pager::-webkit-scrollbar { display: none; }
 .pager .btn { min-width: 40px; height: 40px; padding: 0 10px; font-variant-numeric: tabular-nums; }
 .pager .btn[aria-current="page"] { background: var(--color-primary); color: var(--color-on-primary); box-shadow: none; }
 .pager__gap { min-width: 28px; text-align: center; color: var(--color-text-muted); }
@@ -432,7 +506,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text); font: v
 .modal__foot { display: flex; justify-content: flex-end; gap: var(--space-3); padding: var(--space-6); flex-wrap: wrap; }
 .modal__icon { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; margin-bottom: var(--space-4); background: color-mix(in srgb, var(--danger) 18%, transparent); color: var(--danger); }
 .modal__icon svg { width: 24px; height: 24px; }
-@media (max-width: 560px) {
+@media (max-width: 640px) {
   .modal:not(.modal--drawer) { place-items: end center; padding: 0; }
   .modal:not(.modal--drawer) .modal__dialog { width: 100%; border-radius: var(--radius-xl) var(--radius-xl) 0 0; transform: translateY(40px); }
   .modal__foot .btn { flex: 1; }
@@ -448,7 +522,9 @@ html.is-locked { overflow: hidden; }
 
 /* ---------- Toast ---------- */
 .toasts { position: fixed; right: var(--space-4); bottom: var(--space-4); z-index: var(--z-toast); display: flex; flex-direction: column-reverse; gap: var(--space-3); width: min(380px, calc(100vw - 32px)); pointer-events: none; }
-@media (max-width: 560px) { .toasts { left: 50%; right: auto; translate: -50% 0; } }
+@media (max-width: 640px) { .toasts { left: 50%; right: auto; translate: -50% 0; bottom: calc(var(--space-4) + var(--safe-bottom)); } }
+/* з tabbar тости піднімаються над ним */
+body:has(.tabbar:not(.tabbar--static)) .toasts { bottom: calc(var(--tabbar-height) + var(--space-6) + var(--safe-bottom)); }
 .toast { pointer-events: auto; display: flex; gap: var(--space-3); align-items: flex-start; padding: 14px 12px 14px 16px; border-radius: var(--radius-lg); overflow: hidden;
   animation: toastIn var(--duration-slow) var(--ease-emphasized); }
 .toast.is-out { animation: toastOut var(--duration-base) var(--ease-exit) forwards; }
@@ -561,6 +637,16 @@ th[aria-sort="descending"] .th-sort svg { transform: rotate(180deg); }
 .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); }
 @media (max-width: 1000px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .product-grid { grid-template-columns: 1fr; } }
+.product-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1000px) { .product-grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .product-grid--3 { grid-template-columns: 1fr; } }
+/* телефон: дві колонки компактних карток (товар і ціна поміщаються в 165px) */
+.product-grid--compact { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+.product-grid--compact .card__body { padding: var(--space-3); gap: 6px; }
+.product-grid--compact .card__title { font-size: 15px; }
+.product-grid--compact .price { font-size: 18px; }
+/* фільтри в один рядок із горизонтальним скролом (до країв екрана) */
+@media (max-width: 640px) { .filters--scroll { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(var(--space-page-x) * -1); padding-inline: var(--space-page-x); scrollbar-width: none; } .filters--scroll::-webkit-scrollbar { display: none; } .filters--scroll .tag { flex: none; height: 40px; padding: 0 16px; font-size: 15px; } }
 .more { display: flex; justify-content: center; margin-top: var(--space-10); }
 
 /* Story (media + text, alternating) */
@@ -606,8 +692,11 @@ th[aria-sort="descending"] .th-sort svg { transform: rotate(180deg); }
 [data-theme="light"] .cta__deco { color: var(--forest-600); }
 
 /* Checkout form */
-.checkout { display: grid; grid-template-columns: 1fr 400px; gap: var(--space-10); align-items: start; }
-@media (max-width: 960px) { .checkout { grid-template-columns: 1fr; } }
+.checkout { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: var(--space-10); align-items: start; }
+@media (max-width: 960px) { .checkout { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); } .checkout .summary { position: static; } }
+/* компактний варіант (бічна колонка 300px) — перемикається на одну колонку лише на телефоні */
+.checkout--sm { grid-template-columns: minmax(0, 1fr) 300px; gap: var(--space-6); }
+@media (max-width: 640px) { .checkout--sm { grid-template-columns: minmax(0, 1fr); } .checkout--sm .summary { position: static; } }
 .steps { display: flex; gap: var(--space-2); margin-bottom: var(--space-8); counter-reset: s; flex-wrap: wrap; }
 .steps li { list-style: none; display: flex; align-items: center; gap: var(--space-2); font: var(--text-label); color: var(--color-text-muted); }
 .steps li::before { counter-increment: s; content: counter(s); width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; border: var(--border-input) solid var(--color-border-strong); font: 600 13px/1 var(--font-body); }
@@ -616,13 +705,14 @@ th[aria-sort="descending"] .th-sort svg { transform: rotate(180deg); }
 .steps li + li::after { content: none; }
 .steps li.line::before { content: none; }
 .steps .line { width: 32px; height: 1.5px; background: var(--color-border-strong); align-self: center; }
-.form-section { padding: var(--space-8); margin-bottom: var(--space-6); }
+.form-section { padding: var(--space-8); margin-bottom: var(--space-6); overflow: visible; } /* .card ховає виступи (скруглення медіа) — а тут усередині відкриваються календар і списки */
+@media (max-width: 640px) { .form-section { padding: var(--space-5); } }
 .form-section h3 { font: var(--text-h4); letter-spacing: var(--tracking-h4); text-transform: var(--case-heading); margin: 0 0 var(--space-6); display: flex; align-items: center; justify-content: space-between; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
 .form-grid .full { grid-column: 1 / -1; }
-@media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
 .option-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
-@media (max-width: 700px) { .option-cards { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .option-cards { grid-template-columns: 1fr; } }
 .option-card { position: relative; display: flex; flex-direction: column; gap: 4px; padding: var(--space-4); border-radius: var(--radius-md); border: var(--border-input) solid var(--color-border-strong); cursor: pointer; transition: border-color var(--duration-fast), background var(--duration-fast); }
 .option-card:hover { border-color: var(--input-hover-border); }
 .option-card input { position: absolute; opacity: 0; pointer-events: none; }
@@ -669,3 +759,15 @@ p > svg, span > svg:not([class]) { width: 1.1em; height: 1.1em; flex: none; vert
   .cta__form .btn { width: 100%; }
   .hero__stats { grid-template-columns: 1fr 1fr; } .hero__stats > div:last-child { grid-column: 1 / -1; }
 }
+
+/* ============ Мобільна ергономіка ============ */
+/* Зона натиску ≥44px: малі кнопки (36px) візуально не змінюються, але на дотик отримують 44px по вертикалі. */
+@media (pointer: coarse) {
+  .btn--sm::after, .tag::after, .segmented__btn::after { content: ""; position: absolute; left: 0; right: 0; top: -4px; bottom: -4px; }
+  .tag { position: relative; }
+  .btn--sm.btn--icon::after { left: -4px; right: -4px; }
+  /* iOS наближає сторінку, якщо шрифт поля менший за 16px */
+  .dd__search .input { font-size: 16px; }
+}
+/* Safe area: сторінка не ховає контент під вирізом і індикатором «додому» */
+.safe-top { padding-top: var(--safe-top); } .safe-bottom { padding-bottom: var(--safe-bottom); }

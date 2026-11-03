@@ -216,6 +216,10 @@
   --measure: 65ch;
   --space-section: clamp(64px, 10vw, 128px);
   --space-page-x: clamp(16px, 5vw, 64px);
+  --touch-target: 44px;
+  --tabbar-height: 64px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
   --icon-sm: 16px;
   --icon-md: 20px;
   --icon-lg: 24px;

@@ -1,4 +1,4 @@
-<!doctype html><html lang="uk" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html><html lang="uk" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Кольори · крок 1</title>
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -170,7 +170,29 @@ td.n{font-family:ui-monospace,Menlo,monospace;font-size:12px}td.r{text-align:rig
 pre{background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;overflow:auto;font-size:12px;max-height:340px;color:var(--color-text-muted)}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--color-text);color:var(--color-bg);padding:9px 14px;border-radius:9px;font-size:13px;opacity:0;transition:.2s;pointer-events:none}
 .toast.show{opacity:1}
-</style></head><body><div class="wrap">
+</style><style id="mobile-patch">
+/* Мобільний шар: демо-сторінки містять власну копію стилів, тут — виправлення для телефона. Джерело правди — components/bundle.css */
+:root{--tabbar-height:64px;--touch-target:44px;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+.card:has(.dd.is-open,.dp.is-open){overflow:visible}
+.form-section{overflow:visible}
+.segmented{max-width:100%;overflow-x:auto;scrollbar-width:none}
+.segmented::-webkit-scrollbar{display:none}
+.wrap{min-width:0;overflow-x:clip}
+.g2>*,.g3>*,.two>*,.weights>*,.fonts>*,.rad>*{min-width:0}
+@media(max-width:900px){.g2,.g3{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:860px){.two,.fonts{grid-template-columns:minmax(0,1fr)}.weights{grid-template-columns:repeat(2,minmax(0,1fr))}.rad{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:640px){
+ .box{padding:var(--space-4)}
+ .weights{grid-template-columns:minmax(0,1fr)}
+ .rad{grid-template-columns:repeat(2,minmax(0,1fr))}.rad div{padding:8px}
+ .sp{grid-template-columns:76px 44px minmax(0,1fr);gap:var(--space-3)}
+ .wbig{font-size:44px}
+ .dp__pop{width:min(332px,calc(100vw - 32px))}
+}
+.box:has(>table),.box:has(>.table-wrap){overflow-x:auto}
+.fcard{min-width:0;overflow:hidden}.fcard>*{max-width:100%;overflow-wrap:anywhere}
+</style>
+</head><body><div class="wrap">
 <div class="top"><div><h1>Кольори</h1><p class="lead">Крок 1 з 7. Сім шкал по 11 кроків (OKLCH, рівномірна світлота). Кольори палітр A і C стали кроками однієї шкали (позначені крапкою), тож темна і світла теми — це одна система. Клік по кольору копіює hex.</p></div>
 <div class="toggle"><button data-t="dark" class="on">Темна (основна)</button><button data-t="light">Світла</button></div></div>
 

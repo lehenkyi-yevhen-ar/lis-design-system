@@ -6,7 +6,25 @@
   const openSet = new Set();
   const closeAll = (except) => openSet.forEach(c => c !== except && c.close());
 
+  /* Телефон (≤640px): список і календар відкриваються шторкою знизу (CSS), тут — затемнення за нею. */
+  const sheetMQ = window.matchMedia('(max-width: 640px)');
+  let scrim;
+  function syncScrim() {
+    if (!scrim) { scrim = document.createElement('div'); scrim.className = 'ds-scrim'; scrim.setAttribute('aria-hidden', 'true'); document.body.appendChild(scrim); }
+    scrim.classList.toggle('is-on', sheetMQ.matches && [...openSet].some(c => !c.inline));
+  }
+  sheetMQ.addEventListener && sheetMQ.addEventListener('change', syncScrim);
+
+  /* У превʼю-iframe відкритий поповер не повинен обрізатися краєм рамки: тимчасово додаємо сторінці висоту. */
+  function ensureRoom(root, pop) {
+    if (window.self === window.top || sheetMQ.matches) return;
+    const r = pop.getBoundingClientRect(), top = window.scrollY;
+    if (!root.classList.contains('is-up')) document.body.style.minHeight = Math.ceil(r.bottom + top + 16) + 'px';
+  }
+  const releaseRoom = () => { if (!openSet.size) document.body.style.minHeight = ''; };
+
   function placeUp(root, pop) {
+    if (sheetMQ.matches) { root.classList.remove('is-up'); return; }
     const r = root.getBoundingClientRect();
     const h = Math.min(pop.scrollHeight, 360) + 12;
     root.classList.toggle('is-up', window.innerHeight - r.bottom < h && r.top > h);
@@ -42,13 +60,14 @@
     open() {
       closeAll(this); openSet.add(this); placeUp(this.root, this.menu);
       this.root.classList.add('is-open'); this.trigger.setAttribute('aria-expanded', 'true');
+      syncScrim(); ensureRoom(this.root, this.menu);
       const sel = this.opts().find(o => o.dataset.value === this.value) || this.visible()[0];
       this.setActive(sel, true);
-      (this.search || this.menu).focus({ preventScroll: true });
+      (this.search && !sheetMQ.matches ? this.search : this.menu).focus({ preventScroll: true }); /* на телефоні не викликаємо клавіатуру без потреби */
     }
     close(focus) {
       if (!this.isOpen()) return;
-      this.root.classList.remove('is-open'); this.trigger.setAttribute('aria-expanded', 'false'); openSet.delete(this);
+      this.root.classList.remove('is-open'); this.trigger.setAttribute('aria-expanded', 'false'); openSet.delete(this); syncScrim(); releaseRoom();
       if (this.search) { this.search.value = ''; this.filter(''); }
       if (focus) this.trigger.focus();
     }
@@ -151,9 +170,9 @@
       this.render();
     }
     isOpen() { return this.root.classList.contains('is-open'); }
-    open() { closeAll(this); openSet.add(this); placeUp(this.root, this.pop); this.root.classList.add('is-open'); this.trigger.setAttribute('aria-expanded', 'true');
-      if (this.start) { this.view = new Date(this.start.getFullYear(), this.start.getMonth(), 1); this.focusDate = this.start; } this.render(); this.focusDay(); }
-    close(focus) { if (!this.isOpen()) return; this.root.classList.remove('is-open'); this.trigger.setAttribute('aria-expanded', 'false'); openSet.delete(this); if (focus) this.trigger.focus(); }
+    open() { closeAll(this); openSet.add(this); placeUp(this.root, this.pop); this.root.classList.add('is-open'); this.trigger.setAttribute('aria-expanded', 'true'); syncScrim();
+      if (this.start) { this.view = new Date(this.start.getFullYear(), this.start.getMonth(), 1); this.focusDate = this.start; } this.render(); ensureRoom(this.root, this.pop); this.focusDay(); }
+    close(focus) { if (!this.isOpen()) return; this.root.classList.remove('is-open'); this.trigger.setAttribute('aria-expanded', 'false'); openSet.delete(this); syncScrim(); releaseRoom(); if (focus) this.trigger.focus(); }
     shift(m) { this.view = new Date(this.view.getFullYear(), this.view.getMonth() + m, 1); this.render(); }
     disabled(d) { return this.min && d < this.min; }
     pick(d) {

@@ -6,8 +6,8 @@
 addEventListener('message',function(e){if(e.data&&e.data.dsTheme)document.documentElement.dataset.theme=e.data.dsTheme});
 function h(){parent.postMessage({dsHeight:document.documentElement.scrollHeight,name:location.pathname},'*')}
 addEventListener('load',function(){h();new ResizeObserver(h).observe(document.body)})})()</script>
-<script src="../bundle.js"></script><meta charset="utf-8"><title>ProductSection — preview</title>
-<style>body{padding:20px;background:var(--color-bg)} .pv-label{font:var(--text-caption);color:var(--color-text-muted);margin:0 0 8px}</style></head>
+<script src="../bundle.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>ProductSection — preview</title>
+<style>body{padding:clamp(12px,3.5vw,20px);background:var(--color-bg)} .pv-label{font:var(--text-caption);color:var(--color-text-muted);margin:0 0 8px}</style></head>
 <body>
 <style>.art{position:absolute;inset:0;background:var(--g)}.art::before,.art::after{content:"";position:absolute;border-radius:50%}
 .a1{--g:linear-gradient(150deg,var(--forest-600),var(--forest-900))}.a1::before{width:46%;height:40%;left:27%;top:24%;background:var(--cocoa-300);border-radius:24% 24% 8px 8px}.a1::after{width:54%;height:9%;left:23%;top:62%;background:var(--cocoa-500);border-radius:6px}
@@ -20,7 +20,7 @@ addEventListener('load',function(){h();new ResizeObserver(h).observe(document.bo
 </style>
 <div class="section__head" style="margin-bottom:24px"><div><span class="section__eyebrow">Каталог</span><h2 class="section__title">Популярне зараз</h2></div><a class="btn btn--outline" href="#">Усі товари <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
 <div class="filters"><button class="tag is-selected" aria-pressed="true">Усі</button><button class="tag" aria-pressed="false">Крісла</button><button class="tag" aria-pressed="false">Світло</button></div>
-<div class="product-grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+<div class="product-grid product-grid--3">
 <a class="card card--interactive" href="#" onclick="event.preventDefault()"><div class="card__media"><div class="art a1"></div></div><div class="card__body"><h3 class="card__title">Крісло «Дуб»</h3><div class="card__foot"><span class="price">12 400 ₴</span><button class="btn btn--primary btn--sm btn--icon" aria-label="В кошик"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></button></div></div></a>
 <a class="card card--interactive" href="#" onclick="event.preventDefault()"><div class="card__media"><div class="art a2"></div></div><div class="card__body"><h3 class="card__title">Лампа «Глина»</h3><div class="card__foot"><span class="price">2 320 ₴</span><button class="btn btn--primary btn--sm btn--icon" aria-label="В кошик"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></button></div></div></a>
 <a class="card card--interactive" href="#" onclick="event.preventDefault()"><div class="card__media"><div class="art a3"></div></div><div class="card__body"><h3 class="card__title">Кошик плетений</h3><div class="card__foot"><span class="price">1 850 ₴</span><button class="btn btn--primary btn--sm btn--icon" aria-label="В кошик"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></button></div></div></a></div>

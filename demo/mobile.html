@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="uk" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#121611">
+<title>Ліс — мобільний прототип</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components/bundle.css">
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');try{t=t||localStorage.getItem('lis-theme')}catch(e){}document.documentElement.dataset.theme=t||'dark';
+addEventListener('message',function(e){if(e.data&&e.data.dsTheme)document.documentElement.dataset.theme=e.data.dsTheme})})()</script>
+<style>
+body{min-height:100dvh}
+.m-wrap{padding:calc(12px + var(--safe-top)) var(--space-page-x) 0}
+.m-head{position:sticky;top:calc(12px + var(--safe-top));z-index:var(--z-sticky);margin:0 calc(var(--space-page-x) * -1) 20px;padding:0 var(--space-page-x)}
+.m-head .navbar{padding-left:20px}
+.screen{display:none}.screen.is-on{display:block;animation:fadeUp var(--duration-slow) var(--ease-emphasized)}
+.m-sec{margin:28px 0 14px;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.m-sec h2{font:var(--text-h3);letter-spacing:var(--tracking-h3);margin:0}
+.m-sec a{font:var(--text-label);color:var(--color-accent-text);text-decoration:none}
+.hero-m{padding:8px 0 4px}
+.hero-m h1{font:var(--text-h1);text-transform:uppercase;margin:12px 0}
+.hero-m h1 em{font-style:normal;color:var(--color-primary)}
+.hero-m p{color:var(--color-text-muted);margin:0 0 20px}
+.art{position:absolute;inset:0;background:var(--g)}.art::before,.art::after{content:"";position:absolute;border-radius:50%}
+.a1{--g:linear-gradient(150deg,var(--forest-600),var(--forest-900))}.a1::before{width:46%;height:40%;left:27%;top:24%;background:var(--cocoa-300);border-radius:24% 24% 8px 8px}.a1::after{width:54%;height:9%;left:23%;top:62%;background:var(--cocoa-500);border-radius:6px}
+.a2{--g:linear-gradient(160deg,var(--clay-300),var(--clay-600))}.a2::before{width:40%;height:50%;left:30%;top:18%;background:var(--sand-100);border-radius:50% 50% 12px 12px}.a2::after{width:8%;height:28%;left:46%;top:56%;background:var(--cocoa-700);border-radius:4px}
+.a3{--g:linear-gradient(150deg,var(--sand-300),var(--sand-500))}.a3::before{width:60%;height:30%;left:20%;top:35%;background:var(--forest-700);border-radius:999px}.a3::after{width:22%;height:18%;left:39%;top:41%;background:var(--amber-300)}
+.a5{--g:linear-gradient(170deg,var(--forest-300) 0%,var(--forest-700) 55%,var(--forest-900))}.a5::before{width:70%;height:90%;left:-12%;bottom:-40%;background:var(--forest-800)}.a5::after{width:80%;height:80%;right:-28%;bottom:-36%;background:var(--forest-600)}
+.card__foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto}
+.hero-card{position:relative;aspect-ratio:4/3;border-radius:var(--radius-xl);overflow:hidden;margin-top:24px}
+.hero-card .glass{position:absolute;left:12px;right:12px;bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px 20px;border-radius:var(--radius-full);--btn-radius:var(--radius-full)}
+.hero-card b{display:block;font:600 15px/1.2 var(--font-body)}.hero-card small{color:var(--color-text-muted);font:var(--text-caption)}
+.line{flex-direction:row;gap:14px;align-items:center;padding:12px;margin-bottom:12px}
+.line__img{position:relative;width:72px;height:72px;border-radius:var(--radius-md);overflow:hidden;flex:none}
+.line__t{flex:1;min-width:0}.line__t b{display:block;font:600 15px/1.3 var(--font-body)}.line__t span{font:var(--text-caption);color:var(--color-text-muted)}
+.line .price{font-size:18px}
+.rows{padding:6px;margin:0;list-style:none;display:grid;gap:2px}
+.rows a{display:flex;align-items:center;gap:14px;width:100%;min-height:52px;padding:0 14px;color:var(--color-text);border-radius:var(--radius-md);font:500 16px/1.2 var(--font-body);text-decoration:none}
+.rows a:active{background:color-mix(in srgb,var(--color-text) 8%,transparent)}
+.rows svg{width:var(--icon-lg);height:var(--icon-lg);color:var(--color-text-muted);flex:none}
+.rows .chev{margin-left:auto;width:var(--icon-md);height:var(--icon-md)}
+.who{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.who i{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--color-primary);color:var(--color-on-primary);font:700 24px/1 var(--font-display);font-style:normal}
+.who b{display:block;font:var(--text-h4)}.who span{color:var(--color-text-muted);font:var(--text-body-s)}
+.sp{height:20px}
+</style>
+</head>
+<body class="has-tabbar">
+<div class="m-wrap">
+<header class="m-head"><nav class="navbar navbar--compact glass" aria-label="Шапка"><a class="navbar__logo" href="#home" data-go="home">Ліс</a><div class="navbar__actions"><button class="btn btn--ghost btn--icon" aria-label="Пошук" data-go="catalog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></button></div></nav></header>
+
+<main id="screens">
+<!-- ГОЛОВНА -->
+<section class="screen is-on" id="s-home" aria-label="Головна">
+ <div class="hero-m"><span class="badge badge--accent">Колекція Осінь 2026</span>
+  <h1>Меблі, що <em>ростуть</em> з вами</h1>
+  <p>Масив дуба й ясена з Карпат, шипові з'єднання без металу й натуральна олія.</p>
+  <button class="btn btn--primary btn--lg btn--block" data-go="catalog">Дивитися каталог <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  <div class="hero-card"><div class="art a5"></div><div class="glass"><div><b>Крісло «Дуб»</b><small>Хіт сезону</small></div><span class="price">12 400 ₴</span><button class="btn btn--primary btn--icon" aria-label="В кошик" data-add="Крісло «Дуб»"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></button></div></div>
+ </div>
+ <div class="m-sec"><h2>Популярне</h2><a href="#catalog" data-go="catalog">Усі</a></div>
+ <div class="filters filters--scroll" role="group" aria-label="Категорії"><button class="tag is-selected" aria-pressed="true">Усі</button><button class="tag" aria-pressed="false">Крісла</button><button class="tag" aria-pressed="false">Світло</button><button class="tag" aria-pressed="false">Текстиль</button><button class="tag" aria-pressed="false">Кошики</button></div>
+ <div class="product-grid product-grid--compact" id="grid-home"></div>
+</section>
+
+<!-- КАТАЛОГ -->
+<section class="screen" id="s-catalog" aria-label="Каталог">
+ <h1 class="t-h2" style="margin:0 0 16px">Каталог</h1>
+ <div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg><input class="input" type="search" placeholder="Пошук товарів" aria-label="Пошук товарів" enterkeyhint="search"></div>
+ <div class="row" style="margin:16px 0;flex-wrap:nowrap;justify-content:space-between"><span class="t-muted" style="font:var(--text-body-s)">6 товарів</span>
+  <div class="dd dd--right" data-dd data-value="pop" style="width:200px"><button type="button" class="select dd__trigger" aria-label="Сортування"><span class="dd__value"><span></span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="dd__menu glass-strong"><div class="dd__opt" data-value="pop" data-label="Популярні">Популярні</div><div class="dd__opt" data-value="up" data-label="Дешевші">Спочатку дешевші</div><div class="dd__opt" data-value="down" data-label="Дорожчі">Спочатку дорожчі</div><div class="dd__opt" data-value="new" data-label="Новинки">Новинки</div></div></div></div>
+ <div class="product-grid product-grid--compact" id="grid-cat"></div>
+</section>
+
+<!-- КОШИК -->
+<section class="screen" id="s-cart" aria-label="Кошик">
+ <h1 class="t-h2" style="margin:0 0 16px">Кошик</h1>
+ <div id="lines"></div>
+ <div class="card form-section" style="margin-top:20px;padding:20px">
+  <h3 style="margin-bottom:16px">Доставка</h3>
+  <div class="field"><label class="field__label" for="ph">Телефон</label><div class="input-wrap"><span class="input-suffix" style="left:14px;right:auto">+380</span><input class="input" id="ph" style="padding-left:62px" placeholder="67 123 45 67" type="tel" inputmode="numeric" autocomplete="tel-national"></div></div>
+  <div class="field" style="margin-top:16px"><label class="field__label">Дата доставки</label><div class="dp" data-dp data-min="today"><button type="button" class="select dd__trigger"><span class="dd__value is-placeholder"><svg class="lead-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>Оберіть дату</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="dp__pop glass-strong"></div></div></div>
+ </div>
+ <aside class="card summary" style="margin-top:16px;position:static"><h3>Підсумок</h3><div class="summary__row"><span>Товари</span><b id="sum-items">14 720 ₴</b></div><div class="summary__row"><span>Доставка</span><b>70 ₴</b></div><div class="summary__total"><span>Разом</span><span class="price" id="sum-total">14 790 ₴</span></div></aside>
+</section>
+
+<!-- ПРОФІЛЬ -->
+<section class="screen" id="s-profile" aria-label="Профіль">
+ <div class="who"><i>О</i><div><b>Олена Коваленко</b><span>olena@mail.com</span></div></div>
+ <div class="card"><ul class="rows">
+  <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>Мої замовлення<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a></li>
+  <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg>Обране<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a></li>
+  <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6-5.2-6-10a6 6 0 0 1 12 0c0 4.8-6 10-6 10Z"/><circle cx="12" cy="11" r="2"/></svg>Адреси<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a></li>
+ </ul></div>
+ <div class="m-sec"><h2>Вигляд</h2></div>
+ <div class="segmented glass" role="group" aria-label="Тема" id="themeSeg"><button class="segmented__btn" data-value="dark" aria-pressed="true">Темна</button><button class="segmented__btn" data-value="light" aria-pressed="false">Світла</button></div>
+ <div class="sp"></div>
+ <button class="btn btn--outline btn--block" id="btnToast">Показати сповіщення</button>
+ <p class="t-muted" style="font:var(--text-caption);margin-top:24px;text-align:center">Прототип дизайн-системи «Ліс» · Євген Легенький</p>
+</section>
+</main>
+</div>
+
+<div class="action-bar glass-strong" id="actionBar" hidden><div class="action-bar__sum"><span>Разом</span><span class="price" id="bar-total">14 790 ₴</span></div><button class="btn btn--primary" id="btnPay">До оплати <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+
+<nav class="tabbar glass" id="tabs" aria-label="Основна навігація">
+ <a class="tabbar__item" href="#home" data-go="home" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Головна</span></a>
+ <a class="tabbar__item" href="#catalog" data-go="catalog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg><span>Каталог</span></a>
+ <a class="tabbar__item" href="#cart" data-go="cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span>Кошик</span><span class="tabbar__badge" id="cartBadge" aria-label="2 товари">2</span></a>
+ <a class="tabbar__item" href="#profile" data-go="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg><span>Профіль</span></a>
+</nav>
+
+<script src="../components/bundle.js"></script>
+<script>
+(function(){
+var P=[["Крісло «Дуб»","12 400","a1"],["Лампа «Глина»","2 320","a2"],["Кошик плетений","1 850","a3"],["Лавка «Ясен»","8 900","a5"],["Торшер «Гілка»","4 150","a2"],["Плед «Мох»","2 760","a3"]];
+var BAG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>';
+function card(p){return '<div class="card card--interactive"><div class="card__media"><div class="art '+p[2]+'"></div></div><div class="card__body"><h3 class="card__title">'+p[0]+'</h3><div class="card__foot"><span class="price">'+p[1]+' ₴</span><button class="btn btn--primary btn--sm btn--icon" aria-label="В кошик: '+p[0]+'" data-add="'+p[0]+'">'+BAG+'</button></div></div></div>'}
+document.getElementById('grid-home').innerHTML=P.slice(0,4).map(card).join('');
+document.getElementById('grid-cat').innerHTML=P.map(card).join('');
+var L=[["Крісло «Дуб»",12400,"a1","Дуб, олія"],["Лампа «Глина»",2320,"a2","Кераміка"]],qty=[1,1];
+function fmt(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g," ")+" ₴"}
+function lines(){document.getElementById('lines').innerHTML=L.map(function(l,i){return '<div class="card line"><div class="line__img"><div class="art '+l[2]+'"></div></div><div class="line__t"><b>'+l[0]+'</b><span>'+l[3]+'</span><div class="price" style="margin-top:6px">'+fmt(l[1]*qty[i])+'</div></div><span class="t-muted" style="font:var(--text-caption)">× '+qty[i]+'</span></div>'}).join('');
+ var it=L.reduce(function(a,l,i){return a+l[1]*qty[i]},0),n=qty.reduce(function(a,b){return a+b},0);
+ document.getElementById('sum-items').textContent=fmt(it);document.getElementById('sum-total').textContent=fmt(it+70);document.getElementById('bar-total').textContent=fmt(it+70);
+ var b=document.getElementById('cartBadge');b.textContent=n;b.setAttribute('aria-label',n+' товарів')}
+lines();
+var screens=['home','catalog','cart','profile'],bar=document.getElementById('actionBar');
+function go(id){if(screens.indexOf(id)<0)id='home';
+ screens.forEach(function(s){document.getElementById('s-'+s).classList.toggle('is-on',s===id)});
+ document.querySelectorAll('#tabs [data-go]').forEach(function(a){if(a.dataset.go===id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+ bar.hidden=id!=='cart';document.body.classList.toggle('has-actionbar',id==='cart');window.scrollTo(0,0);
+ if(history.replaceState)history.replaceState(null,'','#'+id)}
+document.addEventListener('click',function(e){
+ var g=e.target.closest('[data-go]');if(g){e.preventDefault();go(g.dataset.go);return}
+ var a=e.target.closest('[data-add]');if(a){e.preventDefault();e.stopPropagation();if(a.dataset.add.indexOf('Крісло')===0)qty[0]+=1;else if(a.dataset.add.indexOf('Лампа')===0)qty[1]+=1;lines();DS.toast({type:'success',title:'Додано в кошик',text:a.dataset.add,duration:2200});return}
+ var t=e.target.closest('.filters .tag');if(t){t.parentNode.querySelectorAll('.tag').forEach(function(x){x.classList.toggle('is-selected',x===t);x.setAttribute('aria-pressed',x===t)})}
+ if(e.target.closest('a[href="#"]'))e.preventDefault()});
+document.getElementById('btnPay').onclick=function(){DS.toast({type:'info',title:'Це прототип',text:'Оплата не підключена.',duration:2500})};
+document.getElementById('btnToast').onclick=function(){DS.toast({type:'success',title:'Сповіщення над навігацією',text:'Тости не перекривають tabbar.',duration:3000})};
+DS.init();
+var seg=document.getElementById('themeSeg');seg.addEventListener('seg:change',function(e){document.documentElement.dataset.theme=e.detail.value;try{localStorage.setItem('lis-theme',e.detail.value)}catch(_){}});
+if(document.documentElement.dataset.theme==='light')seg._c.set('light');
+go((location.hash||'#home').slice(1));
+})();
+</script>
+</body>
+</html>
