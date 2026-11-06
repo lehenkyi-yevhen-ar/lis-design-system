@@ -148,10 +148,10 @@
   --color-accent-strong: var(--clay-600);
   --color-accent-text: var(--clay-600);
   --color-on-accent: var(--sand-50);
-  --color-success: var(--forest-600);
-  --color-warning: var(--amber-600);
+  --color-success: var(--forest-700);
+  --color-warning: var(--amber-700);
   --color-error: var(--brick-600);
-  --color-info: var(--slate-600);
+  --color-info: var(--slate-700);
   --color-focus: var(--clay-500);
   --accent-hover: var(--clay-700);
   --danger: var(--brick-600);

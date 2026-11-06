@@ -761,7 +761,7 @@ th[aria-sort="descending"] .th-sort svg { transform: rotate(180deg); }
 
 /* Pattern labels (документація) */
 [data-pattern] { position: relative; }
-.show-patterns [data-pattern]::before { content: attr(data-pattern); position: absolute; top: 8px; left: 8px; z-index: 50; font: 600 11px/1 ui-monospace, Menlo, monospace; padding: 6px 9px; border-radius: 999px; background: var(--clay-400); color: var(--sand-950); pointer-events: none; }
+.show-patterns [data-pattern]::before { content: attr(data-pattern); position: absolute; top: 8px; left: 8px; z-index: var(--z-dropdown); font: 600 11px/1 ui-monospace, Menlo, monospace; padding: 6px 9px; border-radius: 999px; background: var(--clay-400); color: var(--sand-950); pointer-events: none; }
 .show-patterns [data-pattern] { outline: 1.5px dashed color-mix(in srgb, var(--clay-400) 70%, transparent); outline-offset: -4px; }
 p > svg, span > svg:not([class]) { width: 1.1em; height: 1.1em; flex: none; vertical-align: -.15em; }
 .section__title + .section__lead { margin-top: var(--space-6); }

@@ -1,17 +1,22 @@
 <!-- @dsCard height=300 -->
 <!doctype html>
-<html lang="uk"><head><link rel="stylesheet" href="../../tokens.css?v=20261104a"><link rel="stylesheet" href="../bundle.css?v=20261104a">
-<script>(function(){var t=new URLSearchParams(location.search).get('theme');document.documentElement.dataset.theme=t||'dark';
+<html lang="uk"><head><link rel="stylesheet" href="../../tokens.css?v=20261106a"><link rel="stylesheet" href="../bundle.css?v=20261106a">
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');document.documentElement.dataset.theme=t||'dark';if(new URLSearchParams(location.search).get('compact')==='1'||innerWidth<=640)document.documentElement.classList.add('compact');
 addEventListener('message',function(e){if(e.data&&e.data.dsTheme)document.documentElement.dataset.theme=e.data.dsTheme});
 function h(){parent.postMessage({dsHeight:document.documentElement.scrollHeight,name:location.pathname},'*')}
 addEventListener('load',function(){h();new ResizeObserver(h).observe(document.body)})})()</script>
-<script src="../bundle.js?v=20261104a"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Cover</title>
+<script src="../bundle.js?v=20261106a"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Cover</title>
 <style>
 html,body{margin:0;height:100%}body{background:var(--color-bg);position:relative;overflow:hidden;width:960px;height:300px}
 svg{position:absolute;left:480px;top:0;width:480px;height:300px}
 .forest{fill:var(--color-primary)}.cocoa{fill:var(--color-secondary)}.clay{fill:var(--color-accent)}.ink{fill:var(--forest-800)}.sand{fill:var(--sand-200)}
 .name{position:absolute;left:40px;bottom:72px;max-width:440px;margin:0;font:700 120px/.92 var(--font-display);text-transform:uppercase;color:var(--color-text);letter-spacing:-.01em}
-.cover-tag{position:absolute;left:44px;bottom:40px;max-width:440px;margin:0;font:400 14px/1.4 var(--font-body);color:var(--color-text-muted)}
+.cover-tag{position:absolute;left:44px;bottom:40px;max-width:400px;margin:0;font:400 14px/1.4 var(--font-body);color:var(--color-text-muted)}
+
+html.compact body{width:480px}
+html.compact svg{left:0}
+html.compact .name{left:16px;bottom:16px;max-width:none;padding:12px 24px 8px;font-size:64px;line-height:1;background:var(--glass-tint-strong);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);border:1px solid var(--glass-rim);border-radius:var(--radius-xl);box-shadow:var(--glass-shadow)}
+html.compact .cover-tag{display:none}
 </style></head><body>
 <!--
 blocks: color-primary 208×300 (tall slab, bleeds top & bottom), color-secondary 160×176, color-accent 160×112, forest-800 112×112, sand-200 disc ⌀96 (radius-full)
