@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="uk" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ліс — React</title>
+<link rel="stylesheet" href="../tokens.css?v=20261106a">
+<link rel="stylesheet" href="../components/bundle.css?v=20261106a">
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');try{t=t||localStorage.getItem('lis-theme')}catch(e){}document.documentElement.dataset.theme=t||'dark';
+addEventListener('message',function(e){if(e.data&&e.data.dsTheme)document.documentElement.dataset.theme=e.data.dsTheme})})()</script>
+<style>
+body{margin:0;background:var(--color-bg);color:var(--color-text);font:var(--text-body-m)}
+main{max-width:640px;margin:0 auto;padding:var(--space-10) var(--space-page-x)}
+h1{font:var(--text-h1);text-transform:uppercase;margin:0 0 var(--space-2)}
+p.lead{color:var(--color-text-muted);margin:0 0 var(--space-8)}
+.stack{display:grid;gap:var(--space-5)}
+.row{display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center}
+h2{font:var(--text-h3);margin:var(--space-10) 0 var(--space-4)}
+</style>
+</head>
+<body>
+<main id="root"></main>
+<!-- React завантажується ДО bundle.js: інакше React-шар не підключиться -->
+<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="../components/bundle.js?v=20261106a"></script>
+<script>
+const { createElement: h, useState, useRef } = React;
+const { Button, Badge, Field } = DS;
+const mail = v => /^\S+@\S+\.\S+$/.test(v);
+
+function Subscribe() {
+  const [email, setEmail] = useState('olena@');
+  const [touched, setTouched] = useState(true);
+  const [busy, setBusy] = useState(false);
+  const [done, setDone] = useState(false);
+  const bad = touched && !mail(email);
+  const submit = e => {
+    e.preventDefault(); setTouched(true);
+    if (!mail(email)) return;
+    setBusy(true); setTimeout(() => { setBusy(false); setDone(true); DS.toast({ type: 'success', title: 'Підписку оформлено', text: email }); }, 900);
+  };
+  return h('form', { className: 'stack', onSubmit: submit, noValidate: true },
+    h(Field, { label: 'Email', type: 'email', value: email, onChange: e => { setEmail(e.target.value); setDone(false); }, onBlur: () => setTouched(true),
+      help: 'Надсилатимемо раз на місяць', error: bad ? 'Введіть email повністю, напр. olena@mail.com' : undefined }),
+    h(Field, { label: "Ім'я", optional: true, placeholder: 'Олена' }),
+    h(Field, { label: 'Сума', suffix: '₴', defaultValue: '1 250', inputMode: 'numeric' }),
+    h(Field, { label: 'Коментар', multiline: true, placeholder: 'Напр., зателефонуйте за годину' }),
+    h('div', { className: 'row' },
+      h(Button, { type: 'submit', loading: busy }, done ? 'Підписано' : 'Підписатися'),
+      h(Button, { variant: 'ghost', type: 'reset', onClick: () => { setEmail(''); setTouched(false); setDone(false); } }, 'Скинути'),
+      done ? h(Badge, { tone: 'success', dot: true }, 'Активна') : h(Badge, { tone: 'warning', dot: true }, 'Очікує')));
+}
+
+function Catalog() {
+  const tones = ['neutral', 'brand', 'success', 'warning', 'error', 'info', 'accent'];
+  return h('div', { className: 'stack' },
+    h('div', { className: 'row' }, ['primary', 'secondary', 'accent', 'outline', 'ghost', 'danger'].map(v => h(Button, { key: v, variant: v }, v))),
+    h('div', { className: 'row' },
+      h(Button, { size: 'sm' }, 'Small 36'), h(Button, null, 'Medium 44'), h(Button, { size: 'lg' }, 'Large 52'),
+      h(Button, { variant: 'outline', icon: true, 'aria-label': 'Пошук' }, h('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('circle', { cx: 11, cy: 11, r: 6.5 }), h('path', { d: 'm20 20-4.2-4.2' }))),
+      h(Button, { disabled: true }, 'Disabled'), h(Button, { loading: true }, 'Loading')),
+    h('div', { className: 'row' }, tones.map(t => h(Badge, { key: t, tone: t }, t)), h(Badge, { tone: 'accent', solid: true }, 'Новинка'), h(Button, { variant: 'ghost' }, 'Кошик ', h(Badge, { count: true }, 3))));
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null,
+  h('h1', null, 'Ліс · React'),
+  h('p', { className: 'lead' }, 'DS.Button, DS.Badge, DS.Field — обгортки над тими ж класами з bundle.css.'),
+  h(Subscribe), h('h2', null, 'Каталог'), h(Catalog)));
+</script>
+</body>
+</html>

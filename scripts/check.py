@@ -7,6 +7,7 @@
 4. bundle.css: сирі кольори, z-index, font-family мимо токенів
 5. один cache-bust ?v= у всіх HTML
 6. робочі файли з LF
+7. React-шар: кожен компонент із заголовка @ds-bundle має папку, DS.<Name> і <Name>Props в index.d.ts
 Код виходу ≠ 0, якщо є хоч одна помилка."""
 import io, json, re, sys
 from pathlib import Path
@@ -151,6 +152,22 @@ if len(versions) > 1:
 for p in list(ROOT.glob("*.html")) + list(ROOT.glob("*.css")) + list(ROOT.glob("*.json")) + list(ROOT.glob("*.md")) + list(ROOT.glob("components/**/*")) + list(ROOT.glob("demo/*.html")):
     if p.is_file() and p.suffix in {".html", ".css", ".js", ".json", ".md", ".ts"} and b"\r\n" in p.read_bytes():
         fail("LF", f"{p.relative_to(ROOT).as_posix()}: CRLF — файли мають бути з LF")
+
+# ---------- 7. React-шар ----------
+js = read("components/bundle.js")
+hdr = re.match(r"/\* @ds-bundle: (\{.*?\}) \*/", js)
+dts = read("components/index.d.ts")
+if not hdr:
+    fail("react", "немає заголовка @ds-bundle у першому рядку bundle.js")
+else:
+    for c in json.loads(hdr.group(1))["components"]:
+        n = c["name"]
+        if not (ROOT / "components" / n).is_dir():
+            fail("react", f"{n}: немає папки components/{n}/")
+        if not re.search(r"Object\.assign\(window\.DS,\s*\{[^}]*\b%s\b" % n, js):
+            fail("react", f"{n}: не експортується в window.DS")
+        if f"interface {n}Props" not in dts:
+            fail("react", f"{n}: немає interface {n}Props в index.d.ts")
 
 if errors:
     print("\n".join(errors))

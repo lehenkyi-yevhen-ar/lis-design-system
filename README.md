@@ -32,6 +32,7 @@
 | `components/bundle.css` · `bundle.js` | Стилі компонентів і шаблонів · поведінка (`window.DS`) |
 | `components/<Name>/` | `preview.html` (живий приклад) і `README.md` (правила) |
 | `fonts/` | Ermilov, KyivType Sans |
+| `demo/react.html` | Те саме на React: `DS.Button`, `DS.Badge`, `DS.Field` (React 18+ підключати до `bundle.js`) |
 | `scripts/check.py` | Перевірки: контраст токенів, синхронність `tokens.css`/`index.html`, сирі значення в CSS (`python scripts/check.py`) |
 | `AGENTS.md` | Правила для людей і ШІ-агентів: токени, компоненти, збірка, синхронізація |
 | `demo/` | Повні сторінки: мобільний прототип (`mobile.html`), магазин, компоненти, основи, типографіка, кольори |

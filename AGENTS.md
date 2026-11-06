@@ -12,6 +12,7 @@
 - Зона натиску ≥44×44px, кнопка-іконка з `aria-label`, `prefers-reduced-motion` поважати.
 - Mobile-first: брейкпоінт телефона 640px, сайт-документація перемикається на tabbar/шторку на 900px. Горизонтального скролу на 390px немає.
 - Фреймворки (React, Vue): джерело правди — `tokens.css` + `components/bundle.css`; компонент = обгортка над тими ж класами, поведінка через `DS.init(scope)` у `useEffect`. Деталі — розділ «Фреймворки» в брендбуку.
+- React-шар живе в кінці `components/bundle.js` (другий IIFE, потребує `window.React`): `DS.Button`, `DS.Badge`, `DS.Field`, `DS.useDS`. Новий React-компонент лише складає наявні класи з `bundle.css` (без власних стилів у JS), має `<Name>Props` в `components/index.d.ts` і запис в заголовку `@ds-bundle`. Живий приклад — `demo/react.html`.
 
 ## Як влаштований репозиторій
 

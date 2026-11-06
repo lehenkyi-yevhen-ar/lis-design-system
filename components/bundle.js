@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"DS","components":[]} */
+/* @ds-bundle: {"format":4,"namespace":"DS","components":[{"name":"Button"},{"name":"Field"},{"name":"Badge"}]} */
 /* Components JS · Dropdown, DatePicker, Segmented. Без залежностей. */
 (function () {
   const CHECK = '<svg class="check-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
@@ -452,4 +452,73 @@
     scope.querySelectorAll('[data-open]').forEach(b => b._o || (b._o = b.addEventListener('click', () => DS.modal(b.dataset.open).open(b))));
     tooltips(scope);
   };
+})();
+
+/* ---------- React-шар ----------
+   Тонкі обгортки над тією самою розміткою й класами з bundle.css (джерело правди — CSS, не JS).
+   Працює, лише якщо window.React уже завантажено до цього файла (React 18+). Поведінку складних
+   компонентів (.dd, .dp, таби, модалки) як і раніше дає DS.init — див. DS.useDS. */
+(function () {
+  const R = window.React;
+  if (!R) return;
+  const h = R.createElement;
+  const cx = (...a) => a.filter(Boolean).join(' ');
+  const warned = {};
+  const warn = (key, msg) => { if (!warned[key]) { warned[key] = 1; console.warn('[DS] ' + msg); } };
+
+  /* DS.useDS(ref, deps): викликає DS.init(ref.current) після монтування й після зміни deps.
+     Для контейнера, де лежить розмітка з .dd / .dp / [data-tabs] / [data-acc] / .modal / [data-table] / [data-tip]. */
+  function useDS(ref, deps) {
+    R.useEffect(() => { if (ref.current) window.DS.init(ref.current); }, deps || []);
+  }
+
+  /* Button — variant: primary | secondary | accent | outline | ghost | danger; size: sm | md | lg.
+     icon — квадратна кнопка-іконка (обовʼязковий aria-label), round — капсула, block — на всю ширину, loading — спінер. */
+  const Button = R.forwardRef(function Button(props, ref) {
+    const { variant = 'primary', size = 'md', icon = false, round = false, block = false, loading = false,
+            type = 'button', className, children, onClick, ...rest } = props;
+    if (icon && !rest['aria-label'] && !rest['aria-labelledby']) warn('btn-icon', 'Button icon потребує aria-label.');
+    return h('button', Object.assign({}, rest, {
+      ref, type,
+      className: cx('btn', 'btn--' + variant, size !== 'md' && 'btn--' + size, icon && 'btn--icon', round && 'btn--round', block && 'btn--block', loading && 'is-loading', className),
+      'aria-busy': loading || undefined,
+      onClick: loading ? e => e.preventDefault() : onClick,
+    }), children);
+  });
+
+  /* Badge — tone: neutral | brand | success | warning | error | info | accent.
+     solid — залита (один акцент на картці), dot — з крапкою (таблиці, списки), count — лічильник.
+     Статус завжди словом: children обовʼязкові. */
+  function Badge(props) {
+    const { tone = 'neutral', solid = false, dot = false, count = false, className, children, ...rest } = props;
+    return h('span', Object.assign({}, rest, {
+      className: cx('badge', count ? 'badge--count' : (tone !== 'neutral' && 'badge--' + tone), solid && !count && 'badge--solid', dot && 'badge--dot', className),
+    }), children);
+  }
+
+  /* Field — мітка над полем, підказка під ним. error (рядок) замінює help і вмикає стан помилки.
+     icon — вузол (svg) ліворуч, suffix — текст праворуч (₴, кг), multiline — textarea, optional — позначка «необовʼязково».
+     Решта пропсів (value, onChange, type, placeholder, disabled…) іде в input / textarea. */
+  const Field = R.forwardRef(function Field(props, ref) {
+    const { label, help, error, optional = false, optionalLabel = '· необов’язково', icon, suffix, multiline = false,
+            id, className, ...inputProps } = props;
+    const auto = R.useId();
+    const fid = id || 'f' + auto.replace(/:/g, '');
+    const hid = fid + '-help';
+    const note = error && error !== true ? error : help;
+    const control = h(multiline ? 'textarea' : 'input', Object.assign({}, inputProps, {
+      ref, id: fid, className: multiline ? 'textarea' : 'input',
+      'aria-invalid': error ? true : undefined,
+      'aria-describedby': note ? hid : inputProps['aria-describedby'],
+    }));
+    const wrapped = (icon || suffix) && !multiline
+      ? h('div', { className: 'input-wrap' }, icon, control, suffix ? h('span', { className: 'input-suffix' }, suffix) : null)
+      : control;
+    return h('div', { className: cx('field', error && 'is-error', className) },
+      label ? h('label', { className: 'field__label', htmlFor: fid }, label, optional ? ' ' : null, optional ? h('span', { className: 'opt' }, optionalLabel) : null) : null,
+      wrapped,
+      note ? h('span', { className: 'field__help', id: hid }, note) : null);
+  });
+
+  Object.assign(window.DS, { Button, Badge, Field, useDS });
 })();
